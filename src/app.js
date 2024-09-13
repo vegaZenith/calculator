@@ -1,3 +1,14 @@
+const buttons = document.querySelectorAll(".number-button");
+buttons.forEach((button) => {
+    button.addEventListener("click", updateDisplay);
+});
+
+function updateDisplay(event){
+    const text = event.target.textContent;
+    const display = document.querySelector(".display");
+    display.textContent += text;
+}
+
 function operate(a, b, op){
     switch(op){
         case "+":
