@@ -47,6 +47,7 @@ function equalsClick(event){
     display.textContent = operate(Number(number1), Number(number2), operator);
     number1 = null;
     number2 = null;
+    operatorClicked = true;
 }
 
 function operatorClick(event){
