@@ -14,12 +14,15 @@ operators.forEach((operator) => {
 const equals = document.querySelector(".equals");
 equals.addEventListener("click", equalsClick);
 
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", clearClick);
+
 function clearClick(event){
     const display = document.querySelector(".display");
-    display.textConent = "";
+    display.textContent = "";
     number1 = null;
     number2 = null;
-
+    operatorClicked = false;
 }
 
 function updateDisplay(event){
