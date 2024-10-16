@@ -17,12 +17,23 @@ equals.addEventListener("click", equalsClick);
 const clear = document.querySelector(".clear");
 clear.addEventListener("click", clearClick);
 
+const decimal = document.querySelector(".decimal");
+decimal.addEventListener("click", decimalClick);
+
 function clearClick(event){
     const display = document.querySelector(".display");
     display.textContent = "";
     number1 = null;
     number2 = null;
     operatorClicked = false;
+}
+
+function decimalClick(event){
+    const display = document.querySelector(".display");
+    if(display.textContent === "" || operatorClicked || display.textContent.includes(".")){
+        return;
+    }
+    display.textContent += ".";
 }
 
 function updateDisplay(event){
@@ -38,11 +49,14 @@ function updateDisplay(event){
 }
 
 function equalsClick(event){
+    const display = document.querySelector(".display");
+    if(display.textContent.endsWith(".")){
+        return;
+    }
     if(number1 === null || operator === null){
         return;
     }
 
-    const display = document.querySelector(".display");
     number2 = display.textContent;
     display.textContent = operate(Number(number1), Number(number2), operator);
     number1 = null;
@@ -51,8 +65,12 @@ function equalsClick(event){
 }
 
 function operatorClick(event){
-    operatorClicked = true;
     const display = document.querySelector(".display");
+    if(display.textContent.endsWith(".")){
+        return;
+    }
+    operatorClicked = true;
+    
     if(number1 === null){
         number1 = display.textContent;
         operator = event.target.textContent;
