@@ -2,6 +2,16 @@
     display: flex;
 }
 
+.display{
+    height: 20px;
+    width: 156px;
+    border: 2px solid black;
+    margin: 5px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: right;
+}
+
 .section{
     display: flex;
     flex-direction: column;
@@ -24,4 +34,35 @@
 .big-button-column{
     width: 40px;
     height: 80px;
+}
+
+.operator:hover, .equals:hover, .decimal:hover, .clear:hover{
+    background-color: orangered;
+}
+
+button:active{
+    transform: translateY(1px);
+}
+
+
+.operator, .equals, .decimal, .clear {
+    background-color: orange;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.number-button:hover{
+    background-color: royalblue;
+}
+
+.number-button:active{
+    background-color: royalblue;
+}
+
+.number-button {
+    background-color: lightblue;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
