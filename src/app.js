@@ -21,6 +21,16 @@ clear.addEventListener("click", clearClick);
 const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", decimalClick);
 
+const backspace = document.querySelector(".backspace");
+backspace.addEventListener("click", backspaceClick);
+
+function backspaceClick(event){
+    const display = document.querySelector(".display");
+    if(!operatorClicked){
+        display.textContent = display.textContent.substring(0, display.textContent.length-1);
+    }
+}
+
 function clearClick(event){
     const display = document.querySelector(".display");
     display.textContent = "";
