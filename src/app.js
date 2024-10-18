@@ -1,5 +1,6 @@
 let number1 = null, number2 = null, operator = null;
 let operatorClicked = false;
+const maxCharacters = 22;
 
 const numbers = document.querySelectorAll(".number-button");
 numbers.forEach((button) => {
@@ -29,8 +30,9 @@ function clearClick(event){
 }
 
 function decimalClick(event){
+
     const display = document.querySelector(".display");
-    if(display.textContent === "" || operatorClicked || display.textContent.includes(".")){
+    if(display.textContent.length === maxCharacters || display.textContent === "" || operatorClicked || display.textContent.includes(".")){
         return;
     }
     display.textContent += ".";
@@ -39,8 +41,12 @@ function decimalClick(event){
 function updateDisplay(event){
     const text = event.target.textContent;
     const display = document.querySelector(".display");
+
     
     if(!operatorClicked){
+        if(display.textContent.length === maxCharacters){
+            return;
+        }
         display.textContent += text;      
     } else {
         display.textContent = text;
