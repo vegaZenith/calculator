@@ -4,7 +4,7 @@ const maxCharacters = 22;
 
 const numbers = document.querySelectorAll(".number-button");
 numbers.forEach((button) => {
-    button.addEventListener("click", updateDisplay);
+    button.addEventListener("click", updateDisplayEvent);
 });
 
 const operators = document.querySelectorAll(".operator");
@@ -31,7 +31,41 @@ function backspaceClick(event){
     }
 }
 
-function clearClick(event){
+document.onkeydown = function(event){
+    switch(event.key){
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+            updateDisplay(event.key);
+            break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+            operatorEvent(event.key);
+            break;
+        case ".":
+            decimalClick();
+            break;
+        case "=":
+        case "Enter":
+            equalsClick();
+            break;
+        case "Backspace":
+            backspaceClick();
+        default:
+            break;
+    }
+}
+
+function clearClick(){
     const display = document.querySelector(".display");
     display.textContent = "";
     number1 = null;
@@ -39,7 +73,7 @@ function clearClick(event){
     operatorClicked = false;
 }
 
-function decimalClick(event){
+function decimalClick(){
 
     const display = document.querySelector(".display");
     if(display.textContent.length === maxCharacters || display.textContent === "" || operatorClicked || display.textContent.includes(".")){
@@ -48,8 +82,12 @@ function decimalClick(event){
     display.textContent += ".";
 }
 
-function updateDisplay(event){
+function updateDisplayEvent(event){
     const text = event.target.textContent;
+    updateDisplay(text);
+}
+
+function updateDisplay(text){
     const display = document.querySelector(".display");
 
     
@@ -64,7 +102,7 @@ function updateDisplay(event){
     }
 }
 
-function equalsClick(event){
+function equalsClick(){
     const display = document.querySelector(".display");
     if(display.textContent.endsWith(".")){
         return;
@@ -80,7 +118,7 @@ function equalsClick(event){
     operatorClicked = true;
 }
 
-function operatorClick(event){
+function operatorEvent(text){
     const display = document.querySelector(".display");
     if(display.textContent.endsWith(".")){
         return;
@@ -89,13 +127,17 @@ function operatorClick(event){
     
     if(number1 === null){
         number1 = display.textContent;
-        operator = event.target.textContent;
+        operator = text;
     } else {
         number2 = display.textContent;
         number1 = operate(Number(number1), Number(number2), operator);
         display.textContent = number1;
-        operator = event.target.textContent;
+        operator = text;
     }
+}
+
+function operatorClick(event){
+    operatorEvent(event.target.textContent);
 }
 
 function operate(a, b, op){
